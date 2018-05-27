@@ -1,0 +1,73 @@
+<span *ngFor="let Country of singleCountry">
+  <div style="background : grey">
+    <img [src]="Country.flag" alt="" class="flagDiv">
+  </div>
+  <div class="text-center" style="margin : 20px 0">
+    <div class="row">
+      <div class="col-12">
+        <h1>{{Country.name}} {{Country.nativeName === Country.name ? "" : "(" + Country.nativeName
+          + ")" }}</h1>
+        <h4>Capital City : {{Country.capital}}</h4>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-12">
+          <div class="alert alert-secondary" role="alert">
+            <h5 class="alert-heading">Physical Parmeters</h5>
+            <hr>
+            <b>Region : </b> {{Country.region}}
+            <br>
+            <b>Subregion : </b> {{Country.subregion}}
+            <br>
+            <b>Area : </b> {{Country.area}}
+            <br>
+            <b>Borders : </b>
+            <span class="badge badge-secondary" style="display : inline-block; cursor : pointer; margin : 0 5px;" *ngFor="let borderCountry of Country.borders">
+              <a (click)="goToCountry(borderCountry)">{{borderCountry}}</a>
+            </span>
+          </div>
+        </div>
+        <div class="col-lg-3 col-12">
+          <div class="alert alert-secondary" role="alert">
+            <h5 class="alert-heading">Languages</h5>
+            <hr>
+            <span *ngFor="let language of Country.languages; let i = last">
+              <a [routerLink]="['/countries-view/' + Country.region]" [queryParams]="{ 'language' : language.iso639_1, 'name' : language.name}">{{language.name}}</a>
+              <br>
+            </span>
+          </div>
+        </div>
+        <div class="col-lg-3 col-12">
+          <div class="alert alert-secondary" role="alert">
+            <h5 class="alert-heading">Other Details</h5>
+            <hr>
+            <b>Top Level Domain</b> : {{Country.topLevelDomain}}
+            <br>
+            <b>alpha2Code</b> : {{Country.alpha2Code}}
+            <br>
+            <b>alpha3Code</b> : {{Country.alpha3Code}}
+            <br>
+            <b>Calling Codes</b> :
+            <span *ngFor="let code of Country.callingCodes; let i = last">{{code}}{{i ? "" : ","}}</span>
+            <br>
+            <b>Population</b> : {{Country.population}}
+            <br>
+            <b>Currencies</b> :
+            <span *ngFor="let currency of Country.currencies; let i = last">
+              <a [routerLink]="['/countries-view/' + currency.code]" [queryParams]="{ 'currency' : currency.code, 'name' : currency.name}">{{currency.name}} </a>{{i ? "" : ","}}
+              <br>
+            </span>
+            <b>TimeZone</b> :
+            <span *ngFor="let time of Country.timezones">{{time}}
+              <br>
+            </span>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </span>

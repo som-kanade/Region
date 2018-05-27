@@ -1,0 +1,29 @@
+
+  
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-12 card-container" *ngFor="let country of allCountries">
+        <div class="card h-100">
+          <img class="card-img-top" [src]="country.flag" alt="Card image cap" style="height : 70px;">
+          <div class="card-body">
+            <h5 class="card-title">{{country.name}}</h5>
+            <div class="card-text">
+              <p>
+                <em>Capital</em> : {{country.capital}}</p>
+              <p>
+                <em>SubRegion</em> :
+                <span>{{country.subregion}}</span>
+              </p>
+              <p>
+                <em>Currency</em> :
+                <span *ngFor="let currency of country.currencies; let i = last">
+                  <a [routerLink]="['/allCountries/' + country.region]" [queryParams]="{ 'currency' : currency.code, 'name' : currency.name}">{{currency.name}} </a>{{i ? "" : ","}} </span>
+              </p>
+            </div>
+            <p>
+              <button [routerLink]="['/single-country-view', country.name]" class="btn btn-primary btn-block">See More..</button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
